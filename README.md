@@ -35,6 +35,7 @@ The files that will be synced are:
 # 3.4: Comparison Graph
 - The values were calculated using the helper 'timing.py' file provided
 Specific values outputted by script:
+```
 Timing summary
 Size: 64
     fast: 0.00300
@@ -51,5 +52,5 @@ Size: 512
 Size: 1024
     fast: 12.62239
     gpu: 0.90193
-
+```
 ![runtime-comparison](https://github.com/user-attachments/assets/e73b6fa3-6b9c-45b0-8f50-3e93a0e14f6a)
