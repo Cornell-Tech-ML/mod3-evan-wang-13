@@ -426,8 +426,11 @@ def _mm_practice(out: Storage, a: Storage, b: Storage, size: int) -> None:
     ty = cuda.threadIdx.y  # Thread's y index
 
     # Each thread loads one element of a and one element of b into shared memory
+    # Each only happens once per thread
     if tx < size and ty < size:
-        a_shared[ty, tx] = a[ty * size + tx]
+        a_shared[ty, tx] = a[
+            ty * size + tx
+        ]  # move to correct row, then move to right column
         b_shared[ty, tx] = b[ty * size + tx]
 
     # Ensure all threads have loaded data into shared memory
@@ -440,7 +443,7 @@ def _mm_practice(out: Storage, a: Storage, b: Storage, size: int) -> None:
         # Dot product loop
         for k in range(size):
             acc += a_shared[ty, k] * b_shared[k, tx]
-        # Write to global memory
+        # Write to global memory (only happens once per thread)
         out[ty * size + tx] = acc
 
 
